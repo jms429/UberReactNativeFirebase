@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "uber-eats-clone-live-youtube",
+    "slug": "uber-eats-clone-live-youtube",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "uber-eats-clone-live-youtube"
+}

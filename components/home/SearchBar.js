@@ -4,12 +4,19 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-export default function SearchBar() {
+export default function SearchBar({cityHandler}) {
   return (
     <View style={{marginTop: 15, flexDirection: 'row'}}>
-      <GooglePlacesAutocomplete 
+      <GooglePlacesAutocomplete
+      query={{ key: "AIzaSyCy4fIcq8Nj5cfQfIuJnNe9Yhl7SVm7uAg" }}
       // important! this is all proprietary stuff for GooglePlacesAutocomplete https://www.npmjs.com/package/react-native-google-places-autocomplete
-        placeholder='Search'
+      //onPress gets called when you type in a location and select one it will pass the location object to the cityHandler function in Home.js
+      onPress={(data, details = null) => {
+        console.log(data.description)
+        const city = data.description.split(',')[0]
+        cityHandler(city)
+      }}
+      placeholder='Search'
         styles={{
             textInput: {
                 backgroundColor: '#eee',

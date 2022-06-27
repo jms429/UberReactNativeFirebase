@@ -2,7 +2,8 @@ import { View, Text, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 
-const localRestaurants = [
+// make sure you add 'export' to access in other Files. this is dummy data passed to Home.js and passed backed to props below
+export const localRestaurants = [
     {
       name: "Beachside Bar",
       image_url:
@@ -41,19 +42,33 @@ const localRestaurants = [
     },
   ];
 
-export default function RestaurantItems() {
-  return (
-    <TouchableOpacity activeOpacity={1} style={{ marginBottom: 30,}}>
-        {/* loop starts here */}
-        {localRestaurants.map((restaurant, index) => (
-        <View key={index} style={{backgroundColor: "#fff", marginTop: 5, padding: 15}}>
-            <RestaurantImage image={restaurant.image_url} />
-            <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
-        </View>
-        ))}
-        {/* loop ends here */}
-    </TouchableOpacity>
-  )
+export default function RestaurantItems({ navigation, ...props }) {
+  return (    
+        <>
+        {/* loops starts */}
+          {props.restaurantData.map((restaurant, index) => (
+            <TouchableOpacity 
+              key={index}
+              activeOpacity={1} 
+              style={{ marginBottom: 30,}}
+              onPress= {()=> navigation.navigate("RestaurantDetail", {
+                name: restaurant.name,
+                image: restaurant.image_url,
+                price: restaurant.price,
+                reviews: restaurant.review_count,
+                rating: restaurant.rating,
+                categories: restaurant.categories,
+              })}
+            >
+              <View key={index} style={{backgroundColor: "#fff", marginTop: 5, padding: 15}}>
+                  <RestaurantImage image={restaurant.image_url} />
+                  <RestaurantInfo name={restaurant.name} rating={restaurant.rating} />
+              </View>
+            </TouchableOpacity>
+          ))}
+        </> 
+        // loop ends   
+  );
 }
 
 const RestaurantImage = (props) => (

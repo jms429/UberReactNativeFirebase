@@ -13,7 +13,7 @@ const foods = [
     image: "https://images.unsplash.com/photo-1574894709920-11b28e7367e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8bGFzYWduYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=400&q=60"
   },
   {
-    title: "Tandoori Chicken",
+    title: "Tandoori Tandoori Tandoori Tandoori Chicken",
     description: "Amazingly delicious chicken tandoori is a dish of chicken cooked in a clay oven.",
     price: "$19.20",
     image: "https://images.unsplash.com/photo-1610057099431-d73a1c9d2f2f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8dGFuZG9vcmklMjBjaGlja2VufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=400&q=60"

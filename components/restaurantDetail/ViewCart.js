@@ -5,7 +5,7 @@ import OrderItem from './OrderItem'
 import firebase from '../../firebase'
 
 
-export default function ViewCart() {
+export default function ViewCart( { navigation } ) {
   //this is the modal that will show up when the user clicks the view cart button
   const [modalVisible, setModalVisible] = useState(false)
 
@@ -39,6 +39,7 @@ export default function ViewCart() {
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     })
     setModalVisible(false)
+    navigation.navigate('OrderCompleted')
   }
       
   // stylesheet for the modal

@@ -2,24 +2,23 @@ import { View, Text, TouchableOpacity, Modal, StyleSheet, ScrollView } from 'rea
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import OrderItem from './OrderItem'
+import firebase from '../../firebase'
 
 
 export default function ViewCart() {
   //this is the modal that will show up when the user clicks the view cart button
   const [modalVisible, setModalVisible] = useState(false)
 
-//useSelector is a hook that allows us to access the state of the store
+ //useSelector is a hook that allows us to access the state of the store
   const {items, restaurantName: {restaurantName}} = useSelector((state) => state.cartReducer.selectedItems)
 
-  // const restaurantNameText = restaurantName ? restaurantName : 'No Restaurant Selected'
-
- /* console.log(items) would show something like
- [{'$14.50'},{'$12.50'},{'$4.00'}]
- we use replace to remove the $ from the price and Number to cvonvert strings to numbers
- [14.50,12.50,4.00]
-  we use reduce to sum the prices for our cart
- [28.00]
- the 0 at the end is the initial value for the sum every time the reduce function is called */
+  /* console.log(items) would show something like
+  [{'$14.50'},{'$12.50'},{'$4.00'}]
+  we use replace to remove the $ from the price and Number to cvonvert strings to numbers
+  [14.50,12.50,4.00]
+    we use reduce to sum the prices for our cart
+  [28.00]
+  the 0 at the end is the initial value for the sum every time the reduce function is called */
   const total = items.map((item) => Number(item.price.replace('$', ''))).reduce((prev, curr) => prev + curr, 0)
   
   //number of items in the cart
@@ -30,12 +29,19 @@ export default function ViewCart() {
    Platform.OS === 'android'  
       ?  '$' + total.toFixed(2)  
       :  total.toLocaleString('en-US', { style: 'currency', currency:'USD' });
-  // console.log(totalUSD)
-  // console.log('tst')
-  // console.log(restaurantNameText)
 
-
-// stylesheet for the modal
+  // this adds the order to the database
+  const adddOrderToFirebase = () => { 
+    const db = firebase.firestore()
+    db.collection('orders').add({
+      items: items,
+      restaurantName: restaurantName,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    })
+    setModalVisible(false)
+  }
+      
+  // stylesheet for the modal
   const styles = StyleSheet.create({
     modalContainer: {
       flex: 1,
@@ -103,7 +109,8 @@ export default function ViewCart() {
               <Text>{totalUSD}</Text>
             </View>
               <View style={styles.checkOutContainer}> 
-                <TouchableOpacity style={styles.checkOutButton} onPress={() => setModalVisible(false)}>
+                <TouchableOpacity style={styles.checkOutButton} 
+                  onPress={() => adddOrderToFirebase()}>
                   <Text style={styles.checkOutText}>Checkout ({numItems})</Text>
                 </TouchableOpacity>
               </View>

@@ -49,7 +49,7 @@ export default function Home({navigation}) {
     <>
     <StatusBar backgroundColor="black" barStyle="white-content" />
     <SafeAreaView style={{backgroundColor: "#eee", height: "100%"}}>
-        <View style={{ backgroundColor:"white", padding: 15}}>
+        <View style={{ backgroundColor:"white", padding: 5}}>
             <HeaderTab activeTab={activeTab} setActiveTab={setActiveTab} />
             <SearchBar cityHandler={setCity} />
         </View>

@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import OrderItem from './OrderItem'
 import firebase from '../../firebase'
+import LottieView from 'lottie-react-native'
 
 
 export default function ViewCart( { navigation } ) {
@@ -10,7 +11,7 @@ export default function ViewCart( { navigation } ) {
   const [modalVisible, setModalVisible] = useState(false)
 
  //useSelector is a hook that allows us to access the state of the store
-  const {items, restaurantName: {restaurantName}} = useSelector((state) => state.cartReducer.selectedItems)
+  const {items, restaurantName} = useSelector((state) => state.cartReducer.selectedItems)
 
   /* console.log(items) would show something like
   [{'$14.50'},{'$12.50'},{'$4.00'}]

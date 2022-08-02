@@ -1,11 +1,16 @@
 {
+  "displayName": "UEAPplication",
   "expo": {
     "name": "uber-eats-clone-live-youtube",
     "slug": "uber-eats-clone-live-youtube",
+    "sdkVersion": "45.0.0",
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "android": {
+      "package": "com.uberEats.jason"
+    }
   },
   "name": "uber-eats-clone-live-youtube"
 }

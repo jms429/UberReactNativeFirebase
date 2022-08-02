@@ -7,6 +7,7 @@ import Catagories from '../components/home/Catagories'
 import RestaurantItems, { localRestaurants } from '../components/home/RestaurantItems'
 import BottomTabs from '../components/home/BottomTabs'
 import SearchBar from '../components/home/SearchBar'
+import Greeting from '../components/home/Greeting'
 
 
 export default function Home({navigation}) {
@@ -50,16 +51,17 @@ export default function Home({navigation}) {
     <StatusBar backgroundColor="black" barStyle="white-content" />
     <SafeAreaView style={{backgroundColor: "#eee", height: "100%"}}>
         <View style={{ backgroundColor:"white", padding: 5}}>
+            <Greeting name="USER"/>
             <HeaderTab activeTab={activeTab} setActiveTab={setActiveTab} />
             <SearchBar cityHandler={setCity} />
         </View>
         <ScrollView showsVerticalScrollIndicator={false} >
-            <Catagories />
+            {/* <Catagories /> */}
             {/* the data passed below to RestaurantItems could be from yelp API or dummy data from localRestaurants */}
             <RestaurantItems restaurantData={restaurantData} navigation={navigation} />
         </ScrollView>
         <Divider width={1} />
-        <BottomTabs/>
+        <BottomTabs navigation={navigation}/>
     </SafeAreaView>
     </>
   )
